@@ -6,25 +6,27 @@
   <title>Kedar P Navsariwala - Resume</title>
   
   <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
   
   <style>
     /* Root variables for dark and light mode colors */
     :root {
       --bg-color: #121212;
       --text-color: #e0e0e0;
-      --container-bg: #1e1e1e;
+      --container-bg: #161616; /* Default dark mode container background */
+      --header-bg: #424242; /* Default dark mode header-container background */
       --nav-bg: #333;
       --nav-hover: #555;
-      --link-color: #90caf9;
+      --link-color: hsl(0, 0%, 100%);
     }
     .light-mode {
       --bg-color: #ffffff;
       --text-color: #000000;
-      --container-bg: #f9f9f9;
-      --nav-bg: #e0e0e0;
+      --container-bg: #efefef; /* Light mode container background */
+      --header-bg: #e0e0e0; /* Light mode header-container background */
+      --nav-bg: #ffffff;
       --nav-hover: #cccccc;
-      --link-color: #1976d2;
+      --link-color: #000000;
     }
 
     /* General reset and box-sizing */
@@ -32,7 +34,7 @@
 
     /* Body styling */
     body {
-      font-family: 'Roboto', sans-serif;
+      font-family: 'Montserrat', sans-serif; 
       background-color: var(--bg-color);
       color: var(--text-color);
       padding: 2rem;
@@ -48,9 +50,10 @@
       margin: auto;
       background-color: var(--container-bg);
       padding: 2rem;
-      border-radius: 10px;
+      border-radius: 60px;
       transition: background-color 0.5s, box-shadow 0.5s;
       box-shadow: 0 0 40px rgba(255, 255, 255, 0.5); /* White glow for dark mode */
+      position: relative; /* Add this to enable absolute positioning of child elements */
     }
 
     .light-mode .container {
@@ -58,8 +61,8 @@
     }
 
     /* Header styling */
-    h1 { text-align: center; margin-bottom: 0.5rem; }
-    .sub-title { text-align: center; margin-bottom: 1.5rem; }
+    h1 { text-align: left; margin-bottom: 0.5rem; }
+    .sub-title { text-align: left; margin-bottom: 1.5rem; }
 
     /* Dark mode toggle button styling */
     .mode-toggle {
@@ -116,16 +119,31 @@
     }
     nav a:hover { background-color: var(--nav-hover); }
 
+    nav::-webkit-scrollbar {
+      height: 8px; /* Adjust scrollbar height */
+    }
+
+    nav::-webkit-scrollbar-track {
+      background: var(--container-bg); /* Matches the container background color */
+    }
+
+    nav::-webkit-scrollbar-thumb {
+      background: var(--nav-bg); /* Matches the navbar background color */
+      border-radius: 4px; /* Rounded scrollbar */
+    }
+
+    nav::-webkit-scrollbar-thumb:hover {
+      background: var(--nav-hover); /* Matches the hover color */
+    }
+
     /* Section animations */
     .section {
       margin-top: 2rem;
       opacity: 0;
-      transform: translateY(20px);
-      transition: all 0.6s ease-out;
+      transition: opacity 0.6s ease-in-out; /* Fade in/out effect */
     }
     .section.visible {
-      opacity: 1;
-      transform: translateY(0);
+      opacity: 1; /* Fully visible when intersecting */
     }
 
     /* Section heading styling */
@@ -156,9 +174,23 @@
     /* Header with profile photo */
     .header {
       display: flex;
+      justify-content: center;
       align-items: center;
       margin-bottom: 2rem;
     }
+
+    .header-container {
+      position: relative;
+      right: 65px; /* Adjusted to center the header */
+      top: 5px; /* Adjusted to center the header */
+      display: flex;
+      align-items: center;
+      background-color: var(--header-bg); /* Uses the header-bg variable */
+      padding: 1rem 2rem;
+      border-radius: 45px 0 0 45px; /* Only top-left and bottom-left corners rounded */
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Shadow for the rectangle */
+    }
+
     .profile-photo {
       width: 120px;
       height: 120px;
@@ -166,14 +198,15 @@
       object-fit: cover;
       margin-right: 1rem;
     }
-    .heading-content {
-      border-left: 2px solid var(--nav-bg);
-      padding-left: 1rem;
-    }
 
+    .heading-content {
+      text-align: left;
+    }
+    
     /* Scroll padding for sticky navbar */
     html {
-      scroll-padding-top: 60px; /* Ensures section titles are visible */
+      scroll-padding-top: 80px; /* Increased padding to account for navbar height */
+      scroll-behavior: smooth; /* Enables smooth scrolling for anchor links */
     }
 
     /* Back to top button styling */
@@ -265,16 +298,48 @@
       height: 20px;
       fill: var(--text-color);
     }
+
+    .corner-image {
+      position: absolute;
+      top: 38.5px;
+      right: 40px;
+      width: 120px;
+      height: 150px;
+      border-radius: 0 40px 40px 0; 
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 1rem;
+    }
+
+    .dna-icon {
+      width: 100%;
+      height: 100%;
+    }
+
+    .dna-accent {
+      fill: var(--text-color);
+      transition: fill 0.3s ease;
+    }
+
+    .dna-main {
+      fill: var(--text-color);
+      opacity: 0.8;
+      transition: fill 0.3s ease;
+    }
   </style>
 </head>
 <body>
   <div class="container">
     <!-- Header with profile photo and heading -->
     <div class="header">
-      <img src="Kedar PN Profile photo.jpg" alt="Your Photo" class="profile-photo">
-      <div class="heading-content" style="text-align: left;">
-        <h1 style="text-align: left;">Kedar P Navsariwala</h1>
-        <p class="sub-title" style="text-align: left;">M.Tech Integrated Biotechnology | Pune, Maharashtra, 411027</p>
+      <div class="header-container">
+        <img src="Kedar PN Profile photo.jpg" alt="Your Photo" class="profile-photo">
+        <div class="heading-content">
+          <h1>Kedar P Navsariwala</h1>
+          <p class="sub-title">M.Tech Integrated Biotechnology | Pune, Maharashtra, 411027</p>
+        </div>
       </div>
     </div>
 
@@ -296,7 +361,7 @@
       <a href="#achievements">Achievements</a>
       <a href="#publications">Publications</a>
       <a href="#languages">Languages</a>
-      <a href="#gallery">Gallery</a> 
+      <a href="#gallery">Gallery</a>
     </nav>
 
     <!-- Sections -->
@@ -437,6 +502,11 @@
         <path d="M12 4l-8 8h6v8h4v-8h6z"/>
       </svg>
     </button>
+
+    <!-- Corner image -->
+    <div class="corner-image">
+      <img src="DNA Magnifying glass.png" alt="Corner Image">
+    </div>
   </div>
 
   <!-- Starry background div -->
@@ -467,6 +537,48 @@
         : '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9c0-.46-.04-.92-.1-1.36-.98 1.37-2.58 2.26-4.4 2.26-3.03 0-5.5-2.47-5.5-5.5 0-1.82.89-3.42 2.26-4.4-.44-.06-.9-.1-1.36-.1z"/></svg>';
     }
 
+    /* Smooth scrolling function */
+    function smoothScroll(target, duration) {
+      const navbar = document.querySelector('nav');
+      const navbarHeight = navbar.offsetHeight;
+      const targetPosition = target 
+        ? target.getBoundingClientRect().top + window.pageYOffset - navbarHeight - 20 // Subtract navbar height and add extra padding
+        : 0;
+      const startPosition = window.pageYOffset;
+      const distance = targetPosition - startPosition;
+      let startTime = null;
+
+      function animation(currentTime) {
+        if (startTime === null) startTime = currentTime;
+        const timeElapsed = currentTime - startTime;
+        const run = ease(timeElapsed, startPosition, distance, duration);
+        window.scrollTo(0, run);
+        if (timeElapsed < duration) requestAnimationFrame(animation);
+      }
+
+      function ease(t, b, c, d) {
+        t /= d / 2;
+        if (t < 1) return c / 2 * t * t + b;
+        t--;
+        return -c / 2 * (t * (t - 2) - 1) + b;
+      }
+
+      requestAnimationFrame(animation);
+    }
+
+    // Navbar links smooth scroll
+    const navbarLinks = document.querySelectorAll('nav a');
+    navbarLinks.forEach(link => {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        const targetId = this.getAttribute('href').substring(1);
+        const targetElement = document.getElementById(targetId);
+        if (targetElement) {
+          smoothScroll(targetElement, 1000); // 1000ms duration
+        }
+      });
+    });
+
     /* Back to top button functionality */
     const backToTopButton = document.getElementById('back-to-top');
     window.addEventListener('scroll', () => {
@@ -477,11 +589,9 @@
         backToTopButton.style.display = 'none'; // Hide the button
       }
     });
+
     backToTopButton.addEventListener('click', () => {
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-      });
+      smoothScroll(null, 1000); // Scroll to top with 1000ms duration
     });
 
     const starryBackground = document.querySelector('.starry-background');
